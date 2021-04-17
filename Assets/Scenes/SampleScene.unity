@@ -3034,6 +3034,11 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1156645915015571005, guid: a9057dba4361881419fc7c61aced1847,
+        type: 3}
+      propertyPath: offset
+      value: 350
+      objectReference: {fileID: 0}
     - target: {fileID: 1156645915015571006, guid: a9057dba4361881419fc7c61aced1847,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -3063,6 +3068,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5417597120952682443, guid: a9057dba4361881419fc7c61aced1847,
+        type: 3}
+      propertyPath: offset
+      value: 350
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9057dba4361881419fc7c61aced1847, type: 3}
