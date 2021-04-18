@@ -11,7 +11,6 @@ public class HUDManager : MonoBehaviour
     private int maxAmmo;
     void Awake()
     {
-        GameData.Update();
         EventManager.OnGunAwake += GunAwake;
         EventManager.OnGunShoot += UpdateAmmo;
         EventManager.OnRealSpeedChange += UpdateRealSpeed;
