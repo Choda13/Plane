@@ -7,15 +7,23 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI ammunitionText;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI currentSpeedText;
-    public int maxAmmunition;
+    private int ammo;
+    private int maxAmmo;
     void Awake()
     {
-        maxAmmunition = Gun.maxAmmunition;
         GameData.Update();
+        EventManager.OnGunAwake += GunAwake;
+        EventManager.OnGunShoot += UpdateAmmo;
     }
-    public void UpdateAmmo(int ammo)
+    private void GunAwake(int ammo, int maxAmmo)
     {
-        ammunitionText.text = ammo + "/" + maxAmmunition;
+        this.ammo = ammo;
+        this.maxAmmo = maxAmmo;
+        UpdateAmmo(ammo);
+    }
+    private void UpdateAmmo(int ammo)
+    {
+        ammunitionText.text = ammo + "/" + maxAmmo;
     }
     public void UpdateSpeed(int speed)
     {
@@ -24,5 +32,10 @@ public class HUDManager : MonoBehaviour
     public void UpdateRealSpeed(float speed)
     {
        currentSpeedText.text = "SPEED: " + speed.ToString(".00") + "KM/H";
+    }
+    private void OnDisable()
+    {
+        EventManager.OnGunAwake-=GunAwake;
+        EventManager.OnGunShoot-=UpdateAmmo;
     }
 }

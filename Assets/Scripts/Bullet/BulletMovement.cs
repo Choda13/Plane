@@ -8,15 +8,10 @@ public class BulletMovement : MonoBehaviour
 {
     public float speed;
     public float ttl;
-    public Vector3 velocity;
     Rigidbody Rigidbody;
     void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
-    }
-    void Update()
-    {
-        velocity = transform.InverseTransformDirection(Rigidbody.velocity);
     }
     public void Shoot()
     {
