@@ -40,7 +40,6 @@ public class PlaneMovementPhysics : MonoBehaviour
         ChangeRoll();
         ChangeSpeed();
         PlaneForwardMovement();
-        GameData.manager.UpdateRealSpeed(transform.InverseTransformDirection(Rigidbody.velocity).magnitude);
         if(Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -54,7 +53,8 @@ public class PlaneMovementPhysics : MonoBehaviour
         Rigidbody.AddForce(transform.forward * force);
         Rigidbody.AddForce(transform.up * liftForce);
         WorldVelocity = Rigidbody.velocity.z;
-        LocalVelocity = transform.InverseTransformDirection(Rigidbody.velocity).z;
+        LocalVelocity = transform.InverseTransformDirection(Rigidbody.velocity).magnitude;
+        EventManager.CallRealSpeedChange(LocalVelocity);
     }
     void ChangeSpeed()
     {
@@ -62,7 +62,7 @@ public class PlaneMovementPhysics : MonoBehaviour
             speed--;
         else if(Input.GetKey(KeyCode.W) && speed != maxSpeed)
             speed++;
-        GameData.manager.UpdateSpeed((int)speed);
+        EventManager.CallSpeedChange(speed);
     }
     void ChangeYaw()
     {

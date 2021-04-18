@@ -5,6 +5,7 @@ using UnityEngine;
 
 public static class EventManager
 {
+    #region Gun & Ammo events
     public static event Action<int> OnGunShoot;
     public static event Action<int> OnAmmoPickup;
     public static event Action<int,int> OnGunAwake;
@@ -29,4 +30,21 @@ public static class EventManager
         if(OnGunChange != null)
             OnGunChange(gunType);
     }
+    #endregion
+
+    #region PlaneMovement & Physics events
+    public static event Action<float> OnSpeedChange;
+    public static event Action<float> OnRealSpeedChange;
+    public static void CallSpeedChange(float value)
+    {
+        if(OnSpeedChange != null)
+            OnSpeedChange(value);
+    }
+    public static void CallRealSpeedChange(float value)
+    {
+        if(OnRealSpeedChange != null)
+            OnRealSpeedChange(value);
+    }
+    
+    #endregion
 }

@@ -14,6 +14,8 @@ public class HUDManager : MonoBehaviour
         GameData.Update();
         EventManager.OnGunAwake += GunAwake;
         EventManager.OnGunShoot += UpdateAmmo;
+        EventManager.OnRealSpeedChange += UpdateRealSpeed;
+        EventManager.OnSpeedChange += UpdateSpeed;
     }
     private void GunAwake(int ammo, int maxAmmo)
     {
@@ -25,9 +27,9 @@ public class HUDManager : MonoBehaviour
     {
         ammunitionText.text = ammo + "/" + maxAmmo;
     }
-    public void UpdateSpeed(int speed)
+    public void UpdateSpeed(float speed)
     {
-        speedText.text = "SET SPEED: " + speed + "KM/H";
+        speedText.text = "SET SPEED: " + (int)speed + "KM/H";
     }
     public void UpdateRealSpeed(float speed)
     {
@@ -37,5 +39,7 @@ public class HUDManager : MonoBehaviour
     {
         EventManager.OnGunAwake-=GunAwake;
         EventManager.OnGunShoot-=UpdateAmmo;
+        EventManager.OnRealSpeedChange-=UpdateRealSpeed;
+        EventManager.OnSpeedChange -= UpdateSpeed;
     }
 }
