@@ -82,6 +82,9 @@ public class PlaneMovementPhysics : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        print(other.impulse);
+        if(other.relativeVelocity.y > 10)
+            print(other.relativeVelocity.y +"RIP");
+        else
+            print(other.relativeVelocity.y);
     }
 }
