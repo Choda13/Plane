@@ -6,6 +6,7 @@ public class PlaneController : MonoBehaviour
 {
     public GameObject leftGun;
     public GameObject rightGun;
+    public ParticleSystem explosionFX;
     public int maxAmmo;
     public int ammo;
     void Start()

@@ -47,4 +47,21 @@ public static class EventManager
     }
     
     #endregion
+
+    #region Plane collision and damage events
+    public static event Action OnDestroyed;
+    public static event Action OnPlaneCrash;
+    public static event Action OnAirDestroyed;
+    public static void CallOnDestroyed()
+    {
+        if(OnDestroyed != null)
+            OnDestroyed();
+    }
+    public static void CallOnCrash()
+    {
+        if(OnPlaneCrash != null)
+            OnPlaneCrash();
+        CallOnDestroyed();
+    }
+    #endregion
 }

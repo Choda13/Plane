@@ -1560,7 +1560,7 @@ GameObject:
   - component: {fileID: 1280296701}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1929,6 +1929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftGun: {fileID: 569528610}
   rightGun: {fileID: 1125220702}
+  explosionFX: {fileID: 0}
   maxAmmo: 5000
   ammo: 5000
 --- !u!1001 &1576532394
@@ -3057,6 +3058,44 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1156645914755628785, guid: a9057dba4361881419fc7c61aced1847,
+        type: 3}
+      propertyPath: explosionFX
+      value: 
+      objectReference: {fileID: 19800008, guid: 06736895ea0a4ff408d25e6684dce797,
+        type: 3}
+    - target: {fileID: 1156645914755628785, guid: a9057dba4361881419fc7c61aced1847,
+        type: 3}
+      propertyPath: flameFX
+      value: 
+      objectReference: {fileID: 19800002, guid: 46db5b1dc2de2384da9a75fc063273be,
+        type: 3}
+    - target: {fileID: 1156645914755628785, guid: a9057dba4361881419fc7c61aced1847,
+        type: 3}
+      propertyPath: flameOffset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156645914755628785, guid: a9057dba4361881419fc7c61aced1847,
+        type: 3}
+      propertyPath: nukeFX
+      value: 
+      objectReference: {fileID: 19800002, guid: 6ecf76dc4f268d340b2666896a954bcc,
+        type: 3}
+    - target: {fileID: 1156645914755628785, guid: a9057dba4361881419fc7c61aced1847,
+        type: 3}
+      propertyPath: nukeSize.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156645914755628785, guid: a9057dba4361881419fc7c61aced1847,
+        type: 3}
+      propertyPath: nukeSize.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156645914755628785, guid: a9057dba4361881419fc7c61aced1847,
+        type: 3}
+      propertyPath: nukeSize.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1156645914755628787, guid: a9057dba4361881419fc7c61aced1847,
         type: 3}
       propertyPath: m_Name
@@ -3067,6 +3106,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1156645914755628788, guid: a9057dba4361881419fc7c61aced1847,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: f0ff61896529fa347bbb97698fe00ac6,
+        type: 2}
     - target: {fileID: 1156645914755628790, guid: a9057dba4361881419fc7c61aced1847,
         type: 3}
       propertyPath: m_Drag

@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class PlaneMovementPhysics : MonoBehaviour
 {
+    #region public varaibles
+    public ParticleSystem explosionFX;
+    public ParticleSystem flameFX;
+    public ParticleSystem nukeFX;
+    public Vector3 nukeSize;
+    public Vector3 flameOffset;
     public GameObject centerOfMass;
     public float speed;
     public float liftForceK;
@@ -15,10 +21,13 @@ public class PlaneMovementPhysics : MonoBehaviour
     public GameObject LeftRollForcePoint;
     public GameObject RightRollForcePoint;
     public float rollForceK;
-    public float WorldVelocity;
     public float LocalVelocity;
     public float maxSpeed;
     public float minSpeed;
+
+    #endregion
+
+    #region private variables
     float force;
     float liftForce;
     float pitchInput;
@@ -26,41 +35,53 @@ public class PlaneMovementPhysics : MonoBehaviour
     float gravity;
     float yawInput;
     float rightRollForce;
+    bool engineWorks;
+    bool isCrashed;
+    int groundTouches = 3;
     Rigidbody Rigidbody;
+    #endregion
     void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
         Rigidbody.centerOfMass = centerOfMass.transform.localPosition;
-        Physics.gravity*=2;
+        Physics.gravity *= 2;
+        engineWorks = true;
+        isCrashed = false;
+        groundTouches = 3;
     }
     void FixedUpdate()
     {
-        ChangeYaw();
-        ChangePitch();
-        ChangeRoll();
-        ChangeSpeed();
+        if (engineWorks)
+        {
+            ChangeYaw();
+            ChangePitch();
+            ChangeRoll();
+            ChangeSpeed();
+        }
         PlaneForwardMovement();
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            Physics.gravity/=2;
+            Physics.gravity /= 2;
         }
     }
     void PlaneForwardMovement()
     {
-        force = speed * Rigidbody.mass * Rigidbody.drag;  
+        if (engineWorks)
+        {
+            force = speed * Rigidbody.mass * Rigidbody.drag;
+            Rigidbody.AddForce(transform.forward * force);
+        }
         liftForce = transform.InverseTransformDirection(Rigidbody.velocity).z * liftForceK;
-        Rigidbody.AddForce(transform.forward * force);
         Rigidbody.AddForce(transform.up * liftForce);
-        WorldVelocity = Rigidbody.velocity.z;
         LocalVelocity = transform.InverseTransformDirection(Rigidbody.velocity).magnitude;
         EventManager.CallRealSpeedChange(LocalVelocity);
     }
     void ChangeSpeed()
     {
-        if(Input.GetKey(KeyCode.S) && speed != minSpeed)
+        if (Input.GetKey(KeyCode.S) && speed != minSpeed)
             speed--;
-        else if(Input.GetKey(KeyCode.W) && speed != maxSpeed)
+        else if (Input.GetKey(KeyCode.W) && speed != maxSpeed)
             speed++;
         EventManager.CallSpeedChange(speed);
     }
@@ -80,11 +101,59 @@ public class PlaneMovementPhysics : MonoBehaviour
         Rigidbody.AddForceAtPosition(-transform.up * rollInput * rollForceK, RightRollForcePoint.transform.position, ForceMode.Impulse);
         Rigidbody.AddForceAtPosition(transform.up * rollInput * rollForceK, LeftRollForcePoint.transform.position, ForceMode.Impulse);
     }
+    void PlaneCrashed()
+    {
+        engineWorks = false;
+        isCrashed = true;
+        speed = 0;
+        EventManager.CallOnCrash();
+        EventManager.CallSpeedChange(speed);
+        Instantiate(flameFX, transform.position + flameOffset, flameFX.transform.rotation, transform);
+        Instantiate(explosionFX, transform.position + flameOffset, flameFX.transform.rotation, transform);
+        StartCoroutine(BigExplosionTrigger());
+    }
+    void OnGroundCollision(Collision other)
+    {
+        if (other.relativeVelocity.y > 10 && !isCrashed)
+        {
+            PlaneCrashed();
+        }
+        if (isCrashed)
+        {
+            ContactPoint[] contactPoints = new ContactPoint[other.contacts.Length];
+            other.GetContacts(contactPoints);
+            foreach (var i in contactPoints)
+            {
+                Instantiate(explosionFX, i.point, explosionFX.transform.rotation);
+                Instantiate(flameFX, i.point, flameFX.transform.rotation, transform);
+            }
+        }
+    }
     void OnCollisionEnter(Collision other)
     {
-        if(other.relativeVelocity.y > 10)
-            print(other.relativeVelocity.y +"RIP");
-        else
-            print(other.relativeVelocity.y);
+        if (other.gameObject.tag == "Ground")
+            OnGroundCollision(other);
     }
+
+    #region Coroutines
+     IEnumerator BigExplosion()
+    {
+        var bigBoom = Instantiate(nukeFX, transform.position, nukeFX.transform.rotation, transform);
+        var scale = bigBoom.transform.localScale;
+        bigBoom.transform.localScale += nukeSize;
+        yield return null;
+    }
+    IEnumerator BigExplosionTrigger()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            if (LocalVelocity < 0.005)
+            {
+                StartCoroutine(BigExplosion());
+                break;
+            }
+        }
+    }
+    #endregion
 }
