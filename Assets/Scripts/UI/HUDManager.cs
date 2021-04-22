@@ -7,6 +7,7 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI ammunitionText;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI currentSpeedText;
+    public TextMeshProUGUI fpsTxt;
     private int ammo;
     private int maxAmmo;
     void Awake()
@@ -15,6 +16,10 @@ public class HUDManager : MonoBehaviour
         EventManager.OnGunShoot += UpdateAmmo;
         EventManager.OnRealSpeedChange += UpdateRealSpeed;
         EventManager.OnSpeedChange += UpdateSpeed;
+    }
+    void Update()
+    {
+        fpsTxt.text = "FPS: " + (int)(Time.frameCount/Time.time); 
     }
     private void GunAwake(int ammo, int maxAmmo)
     {

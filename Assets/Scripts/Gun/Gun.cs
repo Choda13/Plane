@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour
     public GameObject bullet;
     public static int ammunition;
     public static int maxAmmunition;
+    public static float recoil;
     public ParticleSystem muzzleFX;
     public float fireRate;
     public float bulletSpeed;
@@ -35,7 +36,12 @@ public class Gun : MonoBehaviour
     }
     void Shoot()
     {   
+        Vector3 rotateBy = new Vector3();
+        rotateBy.x = Random.Range(-recoil, recoil);
+        rotateBy.y = Random.Range(-recoil, recoil);
+        rotateBy.z = Random.Range(-recoil, recoil);
         var bulletObject = Instantiate(bullet, transform.position - transform.up * 0.5f + transform.forward*4f, transform.rotation, transform);
+        bulletObject.transform.Rotate(rotateBy, Space.Self);
         bulletObject.GetComponent<BulletMovement>().speed = Random.Range(bulletSpeed-offset, bulletSpeed);
         bulletObject.GetComponent<BulletMovement>().Shoot();
         EventManager.CallGunShot(ammunition);

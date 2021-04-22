@@ -13,6 +13,7 @@ public class PlaneMovementPhysics : MonoBehaviour
     public Vector3 flameOffset;
     public GameObject centerOfMass;
     public float speed;
+    public float collisionSpeedLimit;
     public float liftForceK;
     public GameObject pitchForcePoint;
     public float pitchForceK;
@@ -37,7 +38,6 @@ public class PlaneMovementPhysics : MonoBehaviour
     float rightRollForce;
     bool engineWorks;
     bool isCrashed;
-    int groundTouches = 3;
     Rigidbody Rigidbody;
     #endregion
     void Awake()
@@ -47,7 +47,6 @@ public class PlaneMovementPhysics : MonoBehaviour
         Physics.gravity *= 2;
         engineWorks = true;
         isCrashed = false;
-        groundTouches = 3;
     }
     void FixedUpdate()
     {
@@ -108,13 +107,12 @@ public class PlaneMovementPhysics : MonoBehaviour
         speed = 0;
         EventManager.CallOnCrash();
         EventManager.CallSpeedChange(speed);
-        Instantiate(flameFX, transform.position + flameOffset, flameFX.transform.rotation, transform);
         Instantiate(explosionFX, transform.position + flameOffset, flameFX.transform.rotation, transform);
         StartCoroutine(BigExplosionTrigger());
     }
-    void OnGroundCollision(Collision other)
+    void PlaneExplosion(Collision other)
     {
-        if (other.relativeVelocity.y > 10 && !isCrashed)
+        if (other.impulse.magnitude/Rigidbody.mass > collisionSpeedLimit && !isCrashed)
         {
             PlaneCrashed();
         }
@@ -124,23 +122,28 @@ public class PlaneMovementPhysics : MonoBehaviour
             other.GetContacts(contactPoints);
             foreach (var i in contactPoints)
             {
-                Instantiate(explosionFX, i.point, explosionFX.transform.rotation);
+                Instantiate(explosionFX, i.point, Quaternion.FromToRotation(explosionFX.transform.up, i.normal));
                 Instantiate(flameFX, i.point, flameFX.transform.rotation, transform);
             }
         }
     }
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Ground")
-            OnGroundCollision(other);
+        PlaneExplosion(other);
     }
-
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+  
     #region Coroutines
      IEnumerator BigExplosion()
     {
         var bigBoom = Instantiate(nukeFX, transform.position, nukeFX.transform.rotation, transform);
         var scale = bigBoom.transform.localScale;
+        var flame = Instantiate(flameFX, transform.position, flameFX.transform.rotation, transform);
         bigBoom.transform.localScale += nukeSize;
+        flame.transform.localScale += nukeSize/2;
         yield return null;
     }
     IEnumerator BigExplosionTrigger()
