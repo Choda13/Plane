@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaneStats : MonoBehaviour
+public class PlayerData : MonoBehaviour
 {
     public GameObject leftGun;
     public GameObject rightGun;
@@ -17,9 +17,5 @@ public class PlaneStats : MonoBehaviour
         Gun.recoil = recoil;
         leftGun.SetActive(true);
         rightGun.SetActive(true);
-    }
-    void Update()
-    {
-        Gun.recoil = recoil;
     }
 }

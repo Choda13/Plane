@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
     void Awake()
     {
         EventManager.CallGunAwake(ammunition, maxAmmunition);
+        EventManager.OnAmmoPickup += AmmoPickup;
     }
     void Update()
     {
@@ -47,5 +48,11 @@ public class Gun : MonoBehaviour
         EventManager.CallGunShot(ammunition);
         StartCoroutine(Cooldown());
         canShoot=false;
+    }
+    void AmmoPickup(int ammo)
+    {
+        ammunition = ammo;
+        if(ammunition>maxAmmunition)
+            ammunition=maxAmmunition;
     }
 }

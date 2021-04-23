@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-public class PlaneMovementPhysics : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     #region public varaibles
     public ParticleSystem explosionFX;
@@ -38,6 +38,7 @@ public class PlaneMovementPhysics : MonoBehaviour
     float rightRollForce;
     bool engineWorks;
     bool isCrashed;
+    int health;
     Rigidbody Rigidbody;
     #endregion
     void Awake()
@@ -47,6 +48,7 @@ public class PlaneMovementPhysics : MonoBehaviour
         Physics.gravity *= 2;
         engineWorks = true;
         isCrashed = false;
+        health=100;
     }
     void FixedUpdate()
     {
@@ -64,6 +66,7 @@ public class PlaneMovementPhysics : MonoBehaviour
             Physics.gravity /= 2;
         }
     }
+    #region Movement
     void PlaneForwardMovement()
     {
         if (engineWorks)
@@ -100,6 +103,8 @@ public class PlaneMovementPhysics : MonoBehaviour
         Rigidbody.AddForceAtPosition(-transform.up * rollInput * rollForceK, RightRollForcePoint.transform.position, ForceMode.Impulse);
         Rigidbody.AddForceAtPosition(transform.up * rollInput * rollForceK, LeftRollForcePoint.transform.position, ForceMode.Impulse);
     }
+    
+    #endregion
     void PlaneCrashed()
     {
         engineWorks = false;

@@ -23,4 +23,8 @@ public class BulletMovement : MonoBehaviour
         yield return new WaitForSeconds(ttl);
         Destroy(gameObject);
     }
+    void OnCollisionEnter(Collision other)
+    {
+        Destroy(gameObject);
+    }
 }

@@ -64,4 +64,13 @@ public static class EventManager
         CallOnDestroyed();
     }
     #endregion
+
+    #region  Enemy
+    public static event Action OnEnemyDestroyed;
+    public static void CallEnemyDestroyed()
+    {
+        if(OnEnemyDestroyed != null)
+            OnEnemyDestroyed();
+    }
+    #endregion
 }

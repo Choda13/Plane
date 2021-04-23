@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class HUDManager : MonoBehaviour
+public class HUD : MonoBehaviour
 {
     public TextMeshProUGUI ammunitionText;
     public TextMeshProUGUI speedText;

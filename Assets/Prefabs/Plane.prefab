@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3b67cf79e30ec4791b773879257404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 90000
+  rotationSpeedModifier: 10
 --- !u!1 &1156645914755628787
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +480,7 @@ GameObject:
   - component: {fileID: 1156645914755628791}
   - component: {fileID: 1156645914755628790}
   - component: {fileID: 1156645914755628785}
+  - component: {fileID: 1575454002}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -520,7 +521,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156645914755628787}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f0ff61896529fa347bbb97698fe00ac6, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -592,8 +593,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94c27912932cb6458b608e2d9088119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionFX: {fileID: 19800008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
+  flameFX: {fileID: 19800002, guid: 46db5b1dc2de2384da9a75fc063273be, type: 3}
+  nukeFX: {fileID: 19800002, guid: 6ecf76dc4f268d340b2666896a954bcc, type: 3}
+  nukeSize: {x: 10, y: 10, z: 10}
+  flameOffset: {x: 0, y: 1, z: 0}
   centerOfMass: {fileID: 1156645914540126596}
   speed: 0
+  collisionSpeedLimit: 15
   liftForceK: 1000
   pitchForcePoint: {fileID: 1156645914790504067}
   pitchForceK: 400
@@ -602,10 +609,26 @@ MonoBehaviour:
   LeftRollForcePoint: {fileID: 1156645914527856929}
   RightRollForcePoint: {fileID: 1156645914839939522}
   rollForceK: 200
-  WorldVelocity: 0
   LocalVelocity: 0
   maxSpeed: 500
   minSpeed: 0
+--- !u!114 &1575454002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156645914755628787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30194902066de1543aedc14951230162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftGun: {fileID: 5417597120952682447}
+  rightGun: {fileID: 1156645915015571001}
+  maxAmmo: 5000
+  ammo: 5000
+  recoil: 1
 --- !u!1 &1156645914772100348
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,11 +895,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftGun
       objectReference: {fileID: 0}
+    - target: {fileID: 8711448304563707332, guid: b4f703a2150a72147b09ffbb3dc4fbfd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f703a2150a72147b09ffbb3dc4fbfd, type: 3}
 --- !u!4 &5417597120952682440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8711448304563707331, guid: b4f703a2150a72147b09ffbb3dc4fbfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 3731905137936079371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5417597120952682447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8711448304563707332, guid: b4f703a2150a72147b09ffbb3dc4fbfd,
     type: 3}
   m_PrefabInstance: {fileID: 3731905137936079371}
   m_PrefabAsset: {fileID: 0}
@@ -947,11 +981,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightGun
       objectReference: {fileID: 0}
+    - target: {fileID: 8711448304563707332, guid: b4f703a2150a72147b09ffbb3dc4fbfd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f703a2150a72147b09ffbb3dc4fbfd, type: 3}
 --- !u!4 &1156645915015571006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8711448304563707331, guid: b4f703a2150a72147b09ffbb3dc4fbfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 7559418724258298877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1156645915015571001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8711448304563707332, guid: b4f703a2150a72147b09ffbb3dc4fbfd,
     type: 3}
   m_PrefabInstance: {fileID: 7559418724258298877}
   m_PrefabAsset: {fileID: 0}
