@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IPlaneController
 {
-    [SerializeField]PlaneMovement planeMovement;
+    [SerializeField]PlaneMovement planeController;
     float pitch;
     float roll;
     float yaw;
@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour, IPlaneController
     bool slowDown;
     void FixedUpdate()
     {
+        if(planeController == null)
+        {
+            Debug.LogError("[PlayerController] planeController is not initialized");
+            return;
+        }
         pitch = Input.GetAxis("Pitch");
         roll = Input.GetAxis("Roll");
         yaw = Input.GetAxis("Yaw");
@@ -25,25 +30,28 @@ public class PlayerController : MonoBehaviour, IPlaneController
         
         if(speedUp)     SpeedUp(1);
         if(slowDown)    SlowDown(1);
+        EventManager.CallRealSpeedChange(planeController.RealSpeed);
     }
     public void SpeedUp(int value)
     {
-        planeMovement.SpeedUp(value);
+        planeController.SpeedUp(value);
+        EventManager.CallSpeedChange(planeController.Speed);
     }
     public void SlowDown(int value)
     {
-        planeMovement.SlowDown(value);
+        planeController.SlowDown(value);
+        EventManager.CallSpeedChange(planeController.Speed);
     }
     public void Pitch(float value)
     {
-        planeMovement.Pitch(value);
+        planeController.Pitch(value);
     }
     public void Roll(float value)
     {
-        planeMovement.Roll(value);
+        planeController.Roll(value);
     }
     public void Yaw(float value)
     {
-        planeMovement.Yaw(value);
+        planeController.Yaw(value);
     }
 }

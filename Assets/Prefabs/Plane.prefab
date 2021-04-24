@@ -479,7 +479,6 @@ GameObject:
   - component: {fileID: 1156645914755628788}
   - component: {fileID: 1156645914755628791}
   - component: {fileID: 1156645914755628790}
-  - component: {fileID: 1575453996}
   - component: {fileID: 1575453997}
   m_Layer: 0
   m_Name: Plane
@@ -581,19 +580,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &1575453996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1156645914755628787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742cf04bc933b234184eb03856b1196d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planeMovement: {fileID: 1575453997}
 --- !u!114 &1575453997
 MonoBehaviour:
   m_ObjectHideFlags: 0

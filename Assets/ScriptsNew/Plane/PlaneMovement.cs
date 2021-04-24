@@ -19,7 +19,7 @@ public class PlaneMovement : MonoBehaviour, IPlaneController
     float realSpeed;
     Rigidbody Rigidbody;
     public float Speed { get => speed; }
-    public float RealSpeed { get => speed; }
+    public float RealSpeed { get => realSpeed; }
     void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
@@ -38,6 +38,8 @@ public class PlaneMovement : MonoBehaviour, IPlaneController
 
         Rigidbody.AddForce(transform.forward * force);
         Rigidbody.AddForce(transform.up * liftForce);
+
+        realSpeed = Rigidbody.velocity.magnitude;
     }
     public void SpeedUp(int value)
     {
