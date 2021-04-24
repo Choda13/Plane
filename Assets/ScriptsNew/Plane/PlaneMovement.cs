@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaneMovement2 : MonoBehaviour, IPlaneController
+public class PlaneMovement : MonoBehaviour, IPlaneController
 {
     [SerializeField] GameObject leftRollForcePoint;
     [SerializeField] GameObject rightRollForcePoint;

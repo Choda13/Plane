@@ -540,7 +540,6 @@ GameObject:
   - component: {fileID: 8711448304563707331}
   - component: {fileID: 8711448304563707329}
   - component: {fileID: 8711448304563707330}
-  - component: {fileID: 8711448304563707328}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -616,22 +615,6 @@ LODGroup:
     - renderer: {fileID: 8711448303680820222}
     - renderer: {fileID: 8711448304271332173}
   m_Enabled: 1
---- !u!114 &8711448304563707328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8711448304563707332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa5a0d31019cb340b3c94f3697d3e52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 254665351212378130, guid: 749cbf7d287c6374abb395b82d2dc49d, type: 3}
-  muzzleFX: {fileID: 8865129862229236087}
-  fireRate: 40
-  bulletSpeed: 750
 --- !u!1001 &8585266812524685548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -704,12 +687,6 @@ PrefabInstance:
 --- !u!4 &6786615644447722689 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2957202860218098733, guid: b5b9d3614b575994c9350c096ec9709a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8585266812524685548}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8865129862229236087 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 874747321992769947, guid: b5b9d3614b575994c9350c096ec9709a,
     type: 3}
   m_PrefabInstance: {fileID: 8585266812524685548}
   m_PrefabAsset: {fileID: 0}

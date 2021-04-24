@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IPlaneController
 {
-    [SerializeField]PlaneMovement2 planeMovement;
+    [SerializeField]PlaneMovement planeMovement;
     float pitch;
     float roll;
     float yaw;

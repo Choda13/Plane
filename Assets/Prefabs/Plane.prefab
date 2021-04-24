@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1156645914260222860}
   m_Layer: 0
-  m_Name: JawForcePoint
+  m_Name: YawForcePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,6 +479,8 @@ GameObject:
   - component: {fileID: 1156645914755628788}
   - component: {fileID: 1156645914755628791}
   - component: {fileID: 1156645914755628790}
+  - component: {fileID: 1575453996}
+  - component: {fileID: 1575453997}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -519,7 +521,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156645914755628787}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f0ff61896529fa347bbb97698fe00ac6, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -579,6 +581,42 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &1575453996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156645914755628787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742cf04bc933b234184eb03856b1196d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planeMovement: {fileID: 1575453997}
+--- !u!114 &1575453997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156645914755628787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3541fbc56478dcf4c8241da7cb6ba174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftRollForcePoint: {fileID: 1156645914527856929}
+  rightRollForcePoint: {fileID: 1156645914839939522}
+  pitchForcePoint: {fileID: 1156645914790504067}
+  yawForcePoint: {fileID: 1156645914260222863}
+  centerOfMass: {fileID: 1156645914540126596}
+  pitchForceModifier: 400
+  rollForceModifier: 200
+  yawForceModifier: 200
+  liftForceModifier: 500
+  maxSpeed: 500
+  minSpeed: 0
 --- !u!1 &1156645914772100348
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,7 +883,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftGun
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8711448304563707332, guid: b4f703a2150a72147b09ffbb3dc4fbfd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8711448304563707328, guid: b4f703a2150a72147b09ffbb3dc4fbfd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b4f703a2150a72147b09ffbb3dc4fbfd, type: 3}
 --- !u!4 &5417597120952682440 stripped
 Transform:
@@ -920,7 +964,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightGun
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8711448304563707332, guid: b4f703a2150a72147b09ffbb3dc4fbfd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8711448304563707328, guid: b4f703a2150a72147b09ffbb3dc4fbfd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b4f703a2150a72147b09ffbb3dc4fbfd, type: 3}
 --- !u!4 &1156645915015571006 stripped
 Transform:
