@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3b67cf79e30ec4791b773879257404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 90000
+  rotationSpeedModifier: 0
 --- !u!1 &1156645914755628787
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +479,6 @@ GameObject:
   - component: {fileID: 1156645914755628788}
   - component: {fileID: 1156645914755628791}
   - component: {fileID: 1156645914755628790}
-  - component: {fileID: 1156645914755628785}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -580,32 +579,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &1156645914755628785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1156645914755628787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d94c27912932cb6458b608e2d9088119, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerOfMass: {fileID: 1156645914540126596}
-  speed: 0
-  liftForceK: 1000
-  pitchForcePoint: {fileID: 1156645914790504067}
-  pitchForceK: 400
-  YawForcePoint: {fileID: 1156645914260222863}
-  yawForceK: 200
-  LeftRollForcePoint: {fileID: 1156645914527856929}
-  RightRollForcePoint: {fileID: 1156645914839939522}
-  rollForceK: 200
-  WorldVelocity: 0
-  LocalVelocity: 0
-  maxSpeed: 500
-  minSpeed: 0
 --- !u!1 &1156645914772100348
 GameObject:
   m_ObjectHideFlags: 0

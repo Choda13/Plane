@@ -15,7 +15,6 @@ public class PlaneMovement2 : MonoBehaviour, IPlaneController
     [SerializeField] float liftForceModifier;
     [SerializeField] float maxSpeed;
     [SerializeField] float minSpeed;
-    [SerializeField] float collisionSpeedLimit;
     float speed;
     float realSpeed;
     Rigidbody Rigidbody;
@@ -24,6 +23,7 @@ public class PlaneMovement2 : MonoBehaviour, IPlaneController
     void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
+        Rigidbody.centerOfMass = centerOfMass.transform.localPosition;
     }
     void FixedUpdate()
     {
